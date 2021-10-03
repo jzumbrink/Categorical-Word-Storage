@@ -1,16 +1,25 @@
-# This is a sample Python script.
+import discord, json
 
-# Press Umschalt+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+client = discord.Client()
 
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Strg+F8 to toggle the breakpoint.
+with open('config.json', 'r') as config_file:
+    config = json.loads(config_file.read())
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+@client.event
+async def on_message(msg):
+    if msg.author.id == client.user.id or not msg.content.startswith(config['prefix']):
+        return
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    await msg.channel.send("Hi")
+
+
+@client.event
+async def on_ready():
+    print('Logged in as')
+    print(client.user.name)
+    print(client.user.id)
+    print('-' * 15)
+
+
+client.run(config['token'])
