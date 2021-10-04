@@ -70,3 +70,8 @@ def get_random_result(first_char: str) -> list:
             random.shuffle(result)
 
     return [s_result[0], l_result[0], f_result[0]]
+
+
+def get_row_count() -> int:
+
+    return session.query(Data).count()

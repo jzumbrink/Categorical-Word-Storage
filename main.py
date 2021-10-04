@@ -28,6 +28,9 @@ async def on_message(msg: discord.Message):
             label=' '.join(msg_content[2:])
         ))
 
+    if command == 'rowcount':
+        await msg.channel.send(f"The table \"data\" consists of {get_row_count()} rows")
+
 
 @client.event
 async def on_ready():
