@@ -22,9 +22,13 @@ session = Session()
 
 Base.metadata.create_all(engine)
 
+def is_label_type(proposed_label_type: str) -> bool:
+    return proposed_label_type in ['s', 'l', 'f']
+
 
 def is_in_database(label_type: str, label: str) -> bool:
-    return False
+    result = session.query(Data).filter(Data.type == label_type, Data.label == label)
+    return result.count() > 0
 
 
 def add_data(label_type: str, label: str) -> str:
@@ -42,6 +46,16 @@ def add_data(label_type: str, label: str) -> str:
     session.commit()
 
     return f"\"{label}\" successfully added as {categories_en[label_type]}!"
+
+
+def delete_data(label_type: str, label: str) -> str:
+    if not is_in_database(label_type, label):
+        return "Requested Object is not in the database!"
+    result = list(session.query(Data).filter(Data.type == label_type, Data.label == label))
+    session.delete(result[0])
+    session.commit()
+
+    return f"The Object \"{label}\" from Type {categories_en[label_type]} was successfully deleted!"
 
 
 def get_random_result(first_char: str) -> list:
