@@ -1,4 +1,5 @@
 import discord, json
+from data import add_data, get_random_result
 
 client = discord.Client()
 
@@ -11,7 +12,16 @@ async def on_message(msg):
     if msg.author.id == client.user.id or not msg.content.startswith(config['prefix']):
         return
 
-    await msg.channel.send("Hi")
+    msg_content = msg.content[len(config['prefix']):].split()
+    command = msg_content[0].lower()
+
+    if command in ['s', 'l', 'f'] and len(msg_content) == 2:
+        add_data(command, msg_content[1])
+
+    if command == 'g' and len(msg_content) == 2 and len(msg_content[1]) == 1 and msg_content[1].isalpha():
+        print(get_random_result(msg_content[1]))
+
+
 
 
 @client.event
