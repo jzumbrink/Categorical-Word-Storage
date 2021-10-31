@@ -11,3 +11,4 @@ class Data(Base):
     label = Column(String)
     creation_date = Column(DATETIME)
     first_char = Column(String)
+    author = Column(Integer)
