@@ -20,13 +20,13 @@ with open('config.json', 'r') as config_file:
     insertion_prefix = config['insertion-prefix']
 
 
-def is_in_database(label_type: str, label: str) -> bool:
-    result = session.query(Data).filter(Data.type == label_type, Data.label == label)
+def is_in_database(label_type: str, label: str, author_id: int) -> bool:
+    result = session.query(Data).filter(Data.type == label_type, Data.label == label, Data.author == author_id)
     return result.count() > 0
 
 
-def add_data(label_type: str, label: str, author: int) -> str:
-    if is_in_database(label_type, label):
+def add_data(label_type: str, label: str, author_id: int) -> str:
+    if is_in_database(label_type, label, author_id):
         return "Already in Database!"
 
     data_row = Data(
@@ -34,7 +34,7 @@ def add_data(label_type: str, label: str, author: int) -> str:
         label=label,
         creation_date=datetime.datetime.now(),
         first_char=label[0].lower(),
-        author=author
+        author=author_id
     )
 
     session.add(data_row)
@@ -43,10 +43,10 @@ def add_data(label_type: str, label: str, author: int) -> str:
     return f"\"{label}\" successfully added as {label_type}!"
 
 
-def delete_data(label_type: str, label: str) -> str:
-    if not is_in_database(label_type, label):
+def delete_data(label_type: str, label: str, author_id: int) -> str:
+    if not is_in_database(label_type, label, author_id):
         return "Requested Object is not in the database!"
-    result = list(session.query(Data).filter(Data.type == label_type, Data.label == label))
+    result = list(session.query(Data).filter(Data.type == label_type, Data.label == label, Data.author == author_id))
     session.delete(result[0])
     session.commit()
 
