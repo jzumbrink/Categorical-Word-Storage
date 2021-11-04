@@ -1,0 +1,6 @@
+{
+  "__comment__": "Rename this file to 'config.json' and insert the discord-bot-token",
+  "token": "insert token",
+  "prefix": "..",
+  "insertion-prefix": "."
+}
