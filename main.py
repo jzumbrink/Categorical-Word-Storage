@@ -34,16 +34,16 @@ async def on_message(msg: discord.Message):
     elif (command == 'ga' or command == 'getall') and len(msg_content) == 3:
         await getall(msg_content, msg)
 
-    elif command == 'remove' and len(msg_content) >= 3:
+    elif (command == 'remove' or command == 'rm') and len(msg_content) >= 3:
         await remove(msg_content, msg)
 
-    elif command == 'rowcount':
+    elif command == 'rowcount' or command == 'rc':
         await rowcount(msg)
 
-    elif command == 'myrowcount':
+    elif command == 'myrowcount' or command == 'mrc':
         await myrowcount(msg)
 
-    elif command == 'mycat':
+    elif command == 'mycategories' or command == 'mc':
         await mycat(msg)
 
 
@@ -53,6 +53,9 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('-' * 15)
+
+    activity = discord.Game(name="..help")
+    await client.change_presence(status=discord.Status.online, activity=activity)
 
 
 client.run(config['token'])

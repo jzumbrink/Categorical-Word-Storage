@@ -9,12 +9,14 @@ with open('config.json', 'r') as config_file:
     insertion_prefix = config['insertion-prefix']
 
 help_string = f"""
-{insertion_prefix}<category> <your value>
-{prefix}ga <category> <char or .>
-{prefix}remove <category> <value>
-{prefix}rowcount
-{prefix}myrowcount
-{prefix}mycat
+**Insert new value into a category:** ```{insertion_prefix}<category> <your value>```
+**Commands** (Note that the short aliases for each command are used in the examples, the full names of the commands are also working)
+__help__: ```{prefix}h```
+__getall__: displays all entities from a category starting with a given character (use \".\" to display all)  ```{prefix}ga <category> <char or .>```
+__remove__:  ```{prefix}rm <category> <entity>```
+__rowcount__: returns the number of rows/entities in the whole database ```{prefix}rc```
+__myrowcount__: returns the number of rows/entities you are currently having ```{prefix}mrc```
+__mycategories__: returns a list of all your categories ```{prefix}mc```
 """
 
 

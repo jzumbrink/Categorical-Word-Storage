@@ -50,7 +50,7 @@ def delete_data(label_type: str, label: str, author_id: int) -> str:
     session.delete(result[0])
     session.commit()
 
-    return f"The Object \"{label}\" from Type {label_type} was successfully deleted!"
+    return f"The Object \"{label}\" from Type \" {label_type}\"  was successfully deleted!"
 
 
 def get_random_result(first_char: str, author_id: int) -> list:
