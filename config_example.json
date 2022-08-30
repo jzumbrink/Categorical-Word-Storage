@@ -1,5 +1,6 @@
 {
-  "token": "OTA1OTIyMTA3OTY2MzYxNjkx.YYRHtQ.hMrFfBdW64bQrHazcFd-barUWho",
+  "__comment__": "Rename this file to 'config.json' and insert token in the field below",
+  "token": "insert token here",
   "prefix": "..",
   "insertion-prefix": "."
 }
